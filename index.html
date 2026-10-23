@@ -1,104 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Henry Willems – Aspiring PhD in Astrophysics</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Henry Willems — PhD researcher in astrophysics at the National Centre for Nuclear Research in Warsaw. Research, programming projects, and interests beyond astronomy.">
+  <meta name="theme-color" content="#f7f9fc">
+  <title>Henry Willems | Astrophysics &amp; Projects</title>
   <style>
+    :root {
+      color-scheme: light;
+      --background: #f7f9fc;
+      --surface: #ffffff;
+      --text: #202a3a;
+      --muted: #556276;
+      --line: #e4e9f0;
+      --accent: #136a8a;
+      --accent-dark: #0b526e;
+      --accent-light: #eaf5f8;
+      --shadow: 0 8px 28px rgba(30, 49, 76, 0.055);
+      --radius: 18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background: #f9f9f9;
-      color: #333;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.65;
     }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-dark); }
+    a:focus-visible { outline: 3px solid #67b2cf; outline-offset: 4px; border-radius: 3px; }
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      background: #fff;
+      padding: 8px 14px;
+      z-index: 10;
     }
-    h1 {
-      font-size: 2em;
+    .skip-link:focus { top: 12px; }
+    .shell { width: min(1050px, calc(100% - 40px)); margin: 0 auto; }
+
+    .site-header {
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
     }
-    nav a {
-      margin: 0 1rem;
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 12px;
+    }
+    .brand { text-decoration: none; font-weight: 750; font-size: 1.08rem; color: var(--text); }
+    .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+    .nav a { text-decoration: none; font-size: .94rem; font-weight: 600; color: var(--muted); }
+    .nav a:hover { color: var(--accent); }
+
+    main { padding: 30px 0 16px; }
+    .hero {
+      background: linear-gradient(125deg, #ffffff 35%, #eef7fa 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(26px, 5vw, 58px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 245px;
+      align-items: center;
+      gap: 30px;
+      overflow: hidden;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .105em;
+      margin: 0 0 12px;
+    }
+    h1 { font-size: clamp(2.15rem, 5vw, 3.6rem); line-height: 1.13; letter-spacing: -.035em; margin: 0; }
+    .hero-subtitle { font-size: clamp(1.04rem, 2.4vw, 1.23rem); color: var(--muted); margin: 17px 0 12px; }
+    .hero-description { margin: 0; max-width: 60ch; }
+    .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 25px; }
+    .button {
       text-decoration: none;
-      color: #0077cc;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      padding: 10px 17px;
+      font-weight: 700;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      line-height: 1.35;
     }
-    section {
-      background: white;
-      padding: 1rem 2rem;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .button:hover { background: var(--accent-dark); color: white; }
+    .button.secondary { background: transparent; color: var(--accent-dark); }
+    .button.secondary:hover { background: var(--accent-light); }
+    .cosmos { width: 210px; height: 210px; position: relative; justify-self: center; }
+    .cosmos::before, .cosmos::after, .orbit {
+      position: absolute;
+      border-radius: 50%;
+      content: "";
     }
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #777;
+    .cosmos::before { inset: 20px; background: radial-gradient(circle at 32% 27%, #80b9cb, #176d92 55%, #123858 100%); box-shadow: 0 14px 38px #2d708c35; }
+    .cosmos::after { inset: 45px 30px 43px 31px; border: 1px solid #ffffff42; transform: rotate(-35deg); }
+    .orbit { inset: 6px -8px; border: 2px solid #669ab099; transform: rotate(-28deg) scaleY(.5); }
+    .star { position: absolute; border-radius: 50%; background: #588da6; width: 5px; height: 5px; }
+    .star.one { left: 0; top: 30px; }
+    .star.two { right: 9px; top: 38px; width: 7px; height: 7px; }
+    .star.three { left: 35px; bottom: 3px; width: 3px; height: 3px; }
+
+    .section { margin-top: 30px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 4vw, 38px); box-shadow: var(--shadow); scroll-margin-top: 20px; }
+    .section-heading { margin-bottom: 18px; }
+    h2 { font-size: clamp(1.45rem, 3vw, 1.85rem); letter-spacing: -.025em; line-height: 1.2; margin: 0 0 9px; }
+    h3 { font-size: 1.1rem; line-height: 1.4; margin: 0 0 10px; }
+    p { margin: 0 0 13px; }
+    p:last-child { margin-bottom: 0; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 23px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .card p { font-size: .96rem; }
+    .card-top { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-top h3 { margin: 0; }
+    .status { border-radius: 50px; padding: 3px 10px; font-size: .73rem; font-weight: 700; background: #f0f3f7; color: #4d5e74; white-space: nowrap; }
+    .status.active { background: var(--accent-light); color: var(--accent-dark); }
+    .meta { color: var(--muted); font-size: .9rem; margin-top: 10px; }
+    .plain-list { padding-left: 21px; margin: 0; }
+    .plain-list li + li { margin-top: 12px; }
+    .section-link { font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .detail { color: var(--muted); font-size: .9rem; }
+    .contact-links { display: flex; gap: 10px 20px; flex-wrap: wrap; }
+    .site-footer { padding: 24px 0 38px; text-align: center; font-size: .86rem; color: var(--muted); }
+    .site-footer p { margin: 0 0 4px; }
+
+    @media (max-width: 760px) {
+      .header-inner { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .hero { grid-template-columns: 1fr; }
+      .cosmos { display: none; }
+      .grid { grid-template-columns: 1fr; }
+      .nav { gap: 6px 15px; }
+      main { padding-top: 20px; }
     }
+    @media (max-width: 440px) {
+      .shell { width: min(100% - 24px, 1050px); }
+      .hero, .section { padding: 22px 19px; }
+      .card { padding: 19px; }
+      .nav a { font-size: .87rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Henry Willems</h1>
-    <p>Aspiring PhD Candidate in Astronomy & Astrophysics</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#work">Past Work</a>
-      <a href="#cv">CV</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top">Henry Willems</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#beyond">Beyond Astronomy</a>
+        <a href="#cv">CV</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I'm Henry Willems, and I have recently completed my master's in astrophysics at the University of Potsdam. I am an aspiring researcher in the field of astronomy and astrophysics. 
-      Before my master's, I pursued my bachelor's in physics at the University of Potdam, where I learned about the core concepts in various areas of physics.
-      I am particularly interested in <strong>stellar astrophysics</strong>, exploring the life cycles, structure, and behavior of stars. 
-      My fields of interest also extend to <strong>galaxies, cosmology</strong>, and the search for <strong>exoplanets</strong>—fascinated by both the large-scale structure of the universe and the possibility of life beyond Earth.
-    </p>
-    <p>
-      I have recently started my PhD in the field of low surface brightness galaxies in the LSST era at the National Centre for Nuclear Research (NCBJ) in Warsaw, Poland
-    </p>
-  </section>
+  <main id="main" class="shell">
+    <div class="hero" id="top">
+      <div>
+        <p class="eyebrow">Astrophysics · Scientific computing · Personal projects</p>
+        <h1>Henry Willems</h1>
+        <p class="hero-subtitle">PhD Researcher in Astrophysics<br>National Centre for Nuclear Research (NCBJ) · Warsaw, Poland</p>
+        <p class="hero-description">I study galaxies and their place in the cosmic web. Beyond research, I enjoy programming, exploring new ideas, and taking on long-term challenges.</p>
+        <div class="actions">
+          <a class="button" href="#research">Explore my research</a>
+          <a class="button secondary" href="#projects">See my projects</a>
+        </div>
+      </div>
+      <div class="cosmos" aria-hidden="true"><div class="orbit"></div><span class="star one"></span><span class="star two"></span><span class="star three"></span></div>
+    </div>
 
-  <section id="work">
-    <h2>Works</h2>
-    <ul>
-      <li><em>Bachelor's Thesis: Hunting for the progenitors of Helium White Dwarfs</em> – Looking for low-mass helium white dwarfs, a type of stars that cannnot be explaind by single star evolution</li>
-      <li><em>Master's Thesis: Determining the physical parameters of eclipsing binaries from the B-type Binaries Charaterisation Programe (BBC) with PHOEBE</em> – Using the Python-based PHOEBE package to determine stellar parameters of eclipsing binaries with existing spectroscopic orbital solutions)</li>
-      <li><em>Conference proceedings paper of the 2024 conference on Binaries and Multiple Stars in the Era of Big Sky Surveys, Litomysl, Czech Republic</em></li>
-    </ul>
-  </section>
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section-heading"><h2 id="about-title">About Me</h2></div>
+      <p>I am an astrophysics PhD researcher at the National Centre for Nuclear Research (NCBJ) in Warsaw, Poland. I began my PhD in October 2025 and work on <strong>low-surface-brightness galaxies and their relationship with the cosmic web</strong>, with a particular interest in large astronomical surveys.</p>
+      <p>I completed my bachelor's degree in Physics and master's degree in Astrophysics at the University of Potsdam. My earlier research focused on stellar astrophysics, especially eclipsing binary stars. My interests also include cosmology, scientific computing, and the methods we use to make sense of astronomical data.</p>
+    </section>
 
-  <section id="cv">
-  <h2>CV & Theses</h2>
-  <ul>
-    <li><a href="CV_Henry_Willems_Oct2025.pdf" target="_blank">Download CV (PDF)</a></li>
-    <li>The CV was made with the <a href="https://www.overleaf.com/latex/templates/moderncv-and-cover-letter-template/sttkgjcysttn" target="_blank">Overleaf Modern CV Template</a></li>
-    <li><strong>Bachelor's Thesis:</strong> Hunting for the progenitors of helium white dwarfs – <em>Available upon request</em></li>
-    <li><strong>Master’s Thesis:</strong> Determining the physical parameters of eclipsing binaries from the B-Type Binaries Characterization programme (BBC) with PHOEBE – <em>Available upon request</em></li>
-  </ul>
-  <p>If you'd like to read either thesis, feel free to <a href="#contact">contact me</a>.</p>
-</section>
+    <section id="research" class="section" aria-labelledby="research-title">
+      <div class="section-heading">
+        <h2 id="research-title">Research &amp; Academic Work</h2>
+        <p class="muted">My current research and selected earlier work.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top"><h3>PhD Research</h3><span class="status active">Current</span></div>
+          <p><strong>Low-Surface-Brightness Galaxies in the Cosmic Web</strong></p>
+          <p>I investigate how low-surface-brightness galaxies are distributed and how they relate to their environments, using large imaging surveys and statistical methods such as galaxy correlation functions.</p>
+          <p class="meta">NCBJ · Warsaw · Since October 2025</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>Master's Thesis</h3><span class="status">Completed</span></div>
+          <p><strong>Determining the physical parameters of eclipsing binaries from the B-type Binaries Characterisation programme (BBC) with PHOEBE</strong></p>
+          <p>Modelling eclipsing binaries and deriving their stellar parameters using the Python-based PHOEBE package and existing spectroscopic orbital solutions.</p>
+          <p class="meta">University of Potsdam · 2025</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>Bachelor's Thesis</h3><span class="status">Completed</span></div>
+          <p><strong>Hunting for the progenitors of helium white dwarfs</strong></p>
+          <p>Investigating the origins of low-mass helium white dwarfs, whose formation often requires interactions between stars.</p>
+          <p class="meta">University of Potsdam</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>Conference Contribution</h3><span class="status">2024</span></div>
+          <p><strong>Binaries and Multiple Stars in the Era of Big Sky Surveys</strong></p>
+          <p>Work presented in connection with the 2024 conference in Litomyšl, Czech Republic.</p>
+          <p class="meta">Conference proceedings / contribution</p>
+        </article>
+      </div>
+    </section>
 
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <h2 id="projects-title">Programming Projects</h2>
+        <p class="muted">Small personal projects where I explore software development, language, and interactive tools. Some are still ideas I plan to build.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top"><h3>Bowser Game</h3><span class="status active">In development</span></div>
+          <p>A personal game programming project through which I experiment with game mechanics and software development.</p>
+          <p>I use <strong>OpenAI Codex as a coding assistant</strong> alongside my own programming experience, decisions, and testing.</p>
+          <p class="detail">A playable demo and project details may be added here as development progresses.</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>METAR Decoder</h3><span class="status">Planned</span></div>
+          <p>A Python tool that turns coded aviation weather reports (METARs) into understandable plain-English descriptions, including wind, visibility, clouds, and weather conditions.</p>
+          <p class="detail">Planned features: paste a METAR, decode it, and read a natural-language explanation.</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>Chess Game Narrator</h3><span class="status">Planned</span></div>
+          <p>A Python project that reads chess games in PGN format and describes the moves in everyday language.</p>
+          <p class="detail">Planned features: PGN upload, move-by-move narration, and translations into other languages.</p>
+        </article>
+        <article class="card">
+          <div class="card-top"><h3>More on GitHub</h3><span class="status">Portfolio</span></div>
+          <p>Code, experiments, and future updates to these projects will be available through my GitHub profile.</p>
+          <p><a class="section-link" href="https://github.com/hwillems2" target="_blank" rel="noopener noreferrer">Visit my GitHub profile ↗</a></p>
+        </article>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: henry.willems@ncbj.gov.pl</p>
-    <p>
-      <!--<a href="https://linkedin.com/in/henrywillems" target="_blank">LinkedIn</a> |-->
-      <a href="https://github.com/hwillems2" target="_blank">GitHub</a> |
-      <a href="https://orcid.org/0009-0006-1477-5634" target="_blank">ORCID</a>
-    </p>
-  </section>
+    <section id="beyond" class="section" aria-labelledby="beyond-title">
+      <div class="section-heading"><h2 id="beyond-title">Beyond Astronomy</h2></div>
+      <h3>Running towards my first marathon</h3>
+      <p>Outside research and programming, I enjoy running. I started training again in October 2026 and am gradually building my endurance, with the long-term goal of completing my first marathon in <strong>2027</strong>.</p>
+      <p>For me, running is a way to stay active, explore my surroundings, and work steadily towards a challenging personal goal.</p>
+    </section>
 
-  <footer>
-    <p>© Henry Willems – 2025</p>
-    <em>Last updated on October 18, 2025</em></p>
+    <section id="cv" class="section" aria-labelledby="cv-title">
+      <div class="section-heading"><h2 id="cv-title">CV &amp; Theses</h2></div>
+      <ul class="plain-list">
+        <li><a class="section-link" href="CV_Henry_Willems_Oct2025.pdf" target="_blank" rel="noopener noreferrer">Download my CV (PDF) ↗</a> <span class="detail">(October 2025 version)</span></li>
+        <li>My <strong>bachelor's and master's theses</strong> are available upon request. Please <a href="#contact">contact me</a> if you are interested in reading either of them.</li>
+      </ul>
+      <p class="meta">CV typeset using the <a href="https://www.overleaf.com/latex/templates/moderncv-and-cover-letter-template/sttkgjcysttn" target="_blank" rel="noopener noreferrer">Modern CV template on Overleaf ↗</a>.</p>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="section-heading"><h2 id="contact-title">Contact</h2></div>
+      <p>For research inquiries or questions about my work, feel free to get in touch.</p>
+      <p><strong>Email:</strong> <a href="mailto:henry.willems@ncbj.gov.pl">henry.willems@ncbj.gov.pl</a></p>
+      <div class="contact-links">
+        <a class="section-link" href="https://github.com/hwillems2" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a class="section-link" href="https://orcid.org/0009-0006-1477-5634" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <p>© 2026 Henry Willems</p>
+    <p>Last updated: 23 October 2026</p>
   </footer>
 </body>
 </html>
-
-
-
